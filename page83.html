@@ -1,0 +1,32 @@
+<script src="underscore.js"></script>
+
+<script>
+  function createScaleFunction(FACTOR) {
+    return function(v) {
+      return _.map(v, function(n) {
+        return (n * FACTOR);
+      })
+    }
+  }
+
+  var scale10 = createScaleFunction(10);
+
+  console.log(scale10([1, 2, 3]));
+
+
+  function createWeirdScaleFunction(FACTOR) {
+    return function(v) {
+      this['FACTOR'] = FACTOR;
+      var captures = this;
+
+      return _.map(v, _.bind(function(n) {
+        return (n * this['FACTOR']);
+      }, captures));
+    };
+  }
+
+  var scale10_1 = createWeirdScaleFunction(10);
+
+  console.log(scale10_1.call({}, [5, 6, 7]));
+
+</script>
