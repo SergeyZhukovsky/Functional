@@ -1,0 +1,21 @@
+<script src="underscore.js"></script>
+
+<script>
+  function average (arr)
+  {
+  	return _.reduce(arr, function(memo, num)
+  	{
+  		return memo + num;
+  	}, 0) / (arr.length === 0 ? 1 : arr.length);
+  }
+
+  function averageDamp(FUN) {
+    return function(n) {
+      return average([n, FUN(n)]);
+    }
+  }
+
+  var averageSq = averageDamp(function(n) { return n * n; });
+
+  console.log(averageSq(10));
+</script>
